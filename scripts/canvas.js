@@ -1,0 +1,29 @@
+function Canvas2D(){
+  var that = this;
+  this.canvas = document.getElementById('canvas');
+  this.ctx = this.canvas.getContext('2d');
+}
+
+Canvas2D.prototype.clear = function(){
+  this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+}
+
+Canvas2D.prototype.drawImage = function(image,position,origin,width,height,rotation = 0){
+
+  if(!position){
+    position = new Vector();
+  }
+
+  if(!origin){
+    origin = new Vector();
+  }
+
+  this.ctx.save();
+  this.ctx.translate(position.x,position.y);
+  this.ctx.rotate(rotation);
+  this.ctx.drawImage(image, -origin.x,-origin.y,width,height);
+  this.ctx.restore();
+}
+
+let Canvas = new Canvas2D();
+
