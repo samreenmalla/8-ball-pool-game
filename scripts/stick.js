@@ -1,5 +1,6 @@
-let stickpos = new Vector(968,8);
+let stickpos = new Vector(969,16);
 let stick_shot_pos = new Vector(950,11);
+let Max_Power = 6000;
 
 function Stick(position,onShoot){
   this.position = position;
@@ -33,7 +34,10 @@ Stick.prototype.updateRotation = function(){
 }
 
 Stick.prototype.increasePower = function(){
-  this.power += 100;
+  if(this.power > Max_Power){
+    return;
+  }
+  this.power += 140;
   this.origin.x += 10;
 }
 

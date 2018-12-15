@@ -1,4 +1,4 @@
-let delta = 1/100;
+let delta = 1/180;
 function GameWorld(){
 
   this.board = new Board();
@@ -29,10 +29,34 @@ function GameWorld(){
 
   this.whiteBall = this.balls[this.balls.length -1];
   this.stick = new Stick(new Vector(368,300),this.whiteBall.shoot.bind(this.whiteBall));
+  //determining table borders
+  this.table = {
+    TopY: 73,
+    RightX: 1220,
+    BottomY: 590,
+    LeftX: 82
+  };
+}
 
+//collision detection
+GameWorld.prototype.handleCollisions = function(){
+
+  for(var i = 0; i< this.balls.length; i++){
+    this.balls[i].collision(this.table);
+    for(var j = i+1; j < this.balls.length; j++){
+      var firstBall = this.balls[i];
+      var secondBall = this.balls[j];
+
+      firstBall.collision(secondBall);
+    }
+  }
 }
 
 GameWorld.prototype.update = function(){
+
+  //check for collisions
+  this.handleCollisions();
+
   this.stick.update();
 
   for(var i = 0; i < this.balls.length; i++){

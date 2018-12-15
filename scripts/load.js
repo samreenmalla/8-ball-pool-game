@@ -26,7 +26,7 @@ function loadAssets(callback){
 
   images.board = loadImage('table1.png');
   images.stick = loadImage('stick2.png');
-  images.whiteBall = loadImage('whiteball.png');
+  images.whiteBall = loadImage('white-ball1.png');
   images.blackBall = loadImage('black-ball8.png');
   images.blueBall = loadImage('blue-ball.png');
   images.redBall = loadImage('red-ball1.png');

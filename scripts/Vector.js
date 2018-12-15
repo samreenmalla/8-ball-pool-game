@@ -22,5 +22,13 @@ Vector.prototype.distance =  function(){
 
 //for collision
 Vector.prototype.add = function(v){
-  return(this.x + v.x, this.y + v.y);
+  return new Vector(this.x + v.x, this.y + v.y);
+}
+
+Vector.prototype.subtract = function(v){
+  return new Vector(this.x - v.x, this.y - v.y);
+}
+
+Vector.prototype.product = function(v){
+  return(this.x * v.x + this.y * v.y);
 }
