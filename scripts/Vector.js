@@ -11,3 +11,16 @@ Vector.prototype.addTo = function(vector){
   this.x += vector.x;
   this.y += vector.y;
 }
+Vector.prototype.mult = function(scalar){
+  return new Vector(this.x * scalar, this.y * scalar);
+}
+
+Vector.prototype.distance =  function(){
+  var dv = Math.pow(this.x , 2) + Math.pow(this.y, 2);
+  return (Math.sqrt(dv));
+}
+
+//for collision
+Vector.prototype.add = function(v){
+  return(this.x + v.x, this.y + v.y);
+}

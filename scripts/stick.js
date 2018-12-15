@@ -1,4 +1,4 @@
-let stickpos = new Vector(977,11);
+let stickpos = new Vector(968,8);
 let stick_shot_pos = new Vector(950,11);
 
 function Stick(position,onShoot){
@@ -7,6 +7,7 @@ function Stick(position,onShoot){
   this.origin = stickpos.copy();
   this.power = 0;
   this.onShoot = onShoot;
+  this.shot = false;
 }
 
 Stick.prototype.update = function(){
@@ -43,6 +44,13 @@ Stick.prototype.shoot = function(){
   this.onShoot(this.power,this.rotation);
   this.power = 0;
   this.origin = stick_shot_pos.copy();
+  this.shot = true;
+}
+
+Stick.prototype.reposition = function(position){
+  this.position = position.copy();
+  this.origin = stickpos.copy();
+  this.shot = false;
 }
 
 Stick.prototype.draw = function(){
