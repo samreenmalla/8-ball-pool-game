@@ -11,6 +11,7 @@ Vector.prototype.addTo = function(vector){
   this.x += vector.x;
   this.y += vector.y;
 }
+
 Vector.prototype.mult = function(scalar){
   return new Vector(this.x * scalar, this.y * scalar);
 }

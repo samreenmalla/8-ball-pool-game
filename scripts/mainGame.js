@@ -1,5 +1,9 @@
 let delta = 1/180;
-function GameWorld(){
+let hole_radius = 46;
+
+function mainGame(){
+
+  var that = this;
 
   this.board = new Board();
 
@@ -29,18 +33,19 @@ function GameWorld(){
 
   this.whiteBall = this.balls[this.balls.length -1];
   this.stick = new Stick(new Vector(368,300),this.whiteBall.shoot.bind(this.whiteBall));
+
   //determining table borders
   this.table = {
     TopY: 73,
     RightX: 1220,
     BottomY: 590,
-    LeftX: 82
+    LeftX: 82,
   };
 }
 
 //collision detection
-GameWorld.prototype.handleCollisions = function(){
-
+mainGame.prototype.handleCollisions = function(){
+  // console.log(this.whiteBall.position);
   for(var i = 0; i< this.balls.length; i++){
     this.balls[i].collision(this.table);
     for(var j = i+1; j < this.balls.length; j++){
@@ -52,7 +57,8 @@ GameWorld.prototype.handleCollisions = function(){
   }
 }
 
-GameWorld.prototype.update = function(){
+
+mainGame.prototype.update = function(){
 
   //check for collisions
   this.handleCollisions();
@@ -68,7 +74,7 @@ GameWorld.prototype.update = function(){
   }
 }
 
-GameWorld.prototype.movingBalls = function(){
+mainGame.prototype.movingBalls = function(){
   let movingBalls = false;
 
   for(i = 0; i< this.balls.length; i++){
@@ -80,7 +86,7 @@ GameWorld.prototype.movingBalls = function(){
   return movingBalls;
 }
 
-GameWorld.prototype.draw = function(){
+mainGame.prototype.draw = function(){
   this.board.draw();
   this.stick.draw();
 

@@ -7,10 +7,12 @@ function Ball(position, color){
   this.velocity = new Vector();
   this.moving = false;
   this.image = getBallsByColor(color);
+  this.onTable = true;
+  this.insideHole = false;
 }
+
 Ball.prototype.update = function(delta){
   this.position.addTo(this.velocity.mult(delta));
-
   //applying friction
   this.velocity = this.velocity.mult(0.984);
 
@@ -28,7 +30,7 @@ Ball.prototype.shoot = function(power, rotation){
 
 //collison with balls
 Ball.prototype.collisionWithBalls = function(ball){
-
+  // console.log(ball.position);
   //normal vector
   var n = this.position.subtract(ball.position);
 
@@ -87,6 +89,7 @@ Ball.prototype.collisionWithBorder = function(table){
 
   var collided = false;
   //collision
+
   if(this.position.y <= table.TopY + ball_radius){
     this.velocity = new Vector(this.velocity.x, -this.velocity.y);
     collided = true;
@@ -107,7 +110,10 @@ Ball.prototype.collisionWithBorder = function(table){
   if(this.collided){
     this.velocity = this.velocity.mult(0.984);
   }
-
+}
+//inside hole
+Ball.prototype.insideHole = function(){
+  insideHole = true;
 }
 
 Ball.prototype.collision = function(object){

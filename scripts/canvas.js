@@ -10,13 +10,13 @@ Canvas2D.prototype.clear = function(){
 
 Canvas2D.prototype.drawImage = function(image,position,origin,width,height,rotation = 0){
 
-  if(!position){
-    position = new Vector();
-  }
+  // if(!position){
+  //   position = new Vector();
+  // }
 
-  if(!origin){
-    origin = new Vector();
-  }
+  // if(!origin){
+  //   origin = new Vector();
+  // }
 
   this.ctx.save();
   this.ctx.translate(position.x,position.y);
