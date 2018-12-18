@@ -1,17 +1,19 @@
-let ballpos = new Vector(25,25);
-let ball_diameter = 38;
-let ball_radius = ball_diameter/2;
-
 function Ball(position, color){
   this.position = position;
   this.velocity = new Vector();
   this.moving = false;
   this.image = getBallsByColor(color);
+  this.color = color;
   this.onTable = true;
-  this.insideHole = false;
+
 }
 
 Ball.prototype.update = function(delta){
+
+  if(!this.onTable){
+    return;
+  }
+
   this.position.addTo(this.velocity.mult(delta));
   //applying friction
   this.velocity = this.velocity.mult(0.984);
@@ -30,6 +32,10 @@ Ball.prototype.shoot = function(power, rotation){
 
 //collison with balls
 Ball.prototype.collisionWithBalls = function(ball){
+
+  if(!this.onTable || !ball.onTable){
+    return;
+  }
   // console.log(ball.position);
   //normal vector
   var n = this.position.subtract(ball.position);
@@ -37,12 +43,12 @@ Ball.prototype.collisionWithBalls = function(ball){
   //find distance
   var dist = n.distance();
 
-  if(dist > ball_diameter){
+  if(dist > CONSTANTS.ball_diameter){
     return;
   }
 
   //minimum translation distance //to make balls not attach together after the collision
-  var MTD = n.mult((ball_diameter - dist)/dist);
+  var MTD = n.mult((CONSTANTS.ball_diameter - dist)/dist);
 
   //pushing and pulling the balls apart
   this.position = this.position.add(MTD.mult(1/2));
@@ -83,26 +89,25 @@ Ball.prototype.collisionWithBalls = function(ball){
 //collsion with table border
 Ball.prototype.collisionWithBorder = function(table){
 
-  if(!this.moving){
-    return;
-  }
-
   var collided = false;
   //collision
 
-  if(this.position.y <= table.TopY + ball_radius){
+  if(this.position.y <= table.TopY + CONSTANTS.ball_radius){
     this.velocity = new Vector(this.velocity.x, -this.velocity.y);
     collided = true;
   }
-  if(this.position.x >= table.RightX - ball_radius){
+  if(this.position.x >= table.RightX - CONSTANTS.ball_radius){
+    // this.position.x = table.RightX - CONSTANTS.ball_radius;
     this.velocity = new Vector(-this.velocity.x, this.velocity.y);
     collided = true;
   }
-  if(this.position.y >= table.BottomY - ball_radius){
+  if(this.position.y >= table.BottomY - CONSTANTS.ball_radius){
+    // this.position.y = table.BottomY - CONSTANTS.ball_radius;
     this.velocity = new Vector(this.velocity.x, -this.velocity.y);
     collided = true;
   }
-  if(this.position.x <= table.LeftX + ball_radius){
+  if(this.position.x <= table.LeftX + CONSTANTS.ball_radius){
+    // this.position.x = table.LeftX + CONSTANTS.ball_radius;
     this.velocity = new Vector(-this.velocity.x, this.velocity.y);
     collided = true;
   }
@@ -111,19 +116,29 @@ Ball.prototype.collisionWithBorder = function(table){
     this.velocity = this.velocity.mult(0.984);
   }
 }
-//inside hole
-Ball.prototype.insideHole = function(){
-  insideHole = true;
-}
 
-Ball.prototype.collision = function(object){
-  if(object instanceof Ball){
-    this.collisionWithBalls(object);
-  }else{
-    this.collisionWithBorder(object);
-  }
-}
+// Ball.prototype.handleBallInPocket = function(){
+
+//   if(!this.onTable){
+//     return;
+//   }
+
+//   let inPocket = this.pockets.some(pocket => {
+//     return this.position.distanceFrom(pocket) < this.hole_radius;
+//   });
+//   if(!inPocket){
+//     return;
+//   }
+
+//   this.onTable = false;
+//   this.moving = false;
+// }
+
 
 Ball.prototype.draw = function(){
-  Canvas.drawImage(this.image, this.position, ballpos,40,40);
+
+  if(!this.onTable){
+    return;
+  }
+  Canvas.drawImage(this.image, this.position, CONSTANTS.ballpos,40,40);
 }

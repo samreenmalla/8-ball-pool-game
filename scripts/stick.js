@@ -1,11 +1,7 @@
-let stickpos = new Vector(969,16);
-let stick_shot_pos = new Vector(950,11);
-let Max_Power = 6000;
-
 function Stick(position,onShoot){
   this.position = position;
   this.rotation = 0;
-  this.origin = stickpos.copy();
+  this.origin = CONSTANTS.stickpos.copy();
   this.power = 0;
   this.onShoot = onShoot;
   this.shot = false;
@@ -13,8 +9,13 @@ function Stick(position,onShoot){
 
 Stick.prototype.update = function(){
 
+  //to stop the stick from moving the ball after shooting
+  if(this.shot){
+    return;
+  }
+
   if(Mouse.left.down){
-    console.log("left down");
+
     this.increasePower();
 
   }else if(this.power > 0) {
@@ -34,7 +35,7 @@ Stick.prototype.updateRotation = function(){
 }
 
 Stick.prototype.increasePower = function(){
-  if(this.power > Max_Power){
+  if(this.power > CONSTANTS.Max_Power){
     return;
   }
   this.power += 140;
@@ -43,17 +44,17 @@ Stick.prototype.increasePower = function(){
 
 //shooting the balls
 Stick.prototype.shoot = function(){
-  // this.power = power;
-  // this.rotation = rotation;
+
   this.onShoot(this.power,this.rotation);
   this.power = 0;
-  this.origin = stick_shot_pos.copy();
+  this.origin = CONSTANTS.stick_shot_pos.copy();
   this.shot = true;
 }
 
 Stick.prototype.reposition = function(position){
+
   this.position = position.copy();
-  this.origin = stickpos.copy();
+  this.origin = CONSTANTS.stickpos.copy();
   this.shot = false;
 }
 

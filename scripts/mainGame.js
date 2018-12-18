@@ -1,37 +1,12 @@
-let delta = 1/180;
-let hole_radius = 46;
-
 function mainGame(){
 
   var that = this;
 
   this.board = new Board();
 
-  this.balls = [
-    [new Vector(880,340), Color.Green],
-    [new Vector(920,320), Color.Green],
-    [new Vector(960,300),Color.Red],
-    [new Vector(1000,280), Color.Green],
-    [new Vector(1040,260), Color.Red],
+  this.balls = CONSTANTS.ball_params.map(params => new Ball(...params));
 
-    [new Vector(920,360), Color.Red],
-    [new Vector(960,380), Color.Green],
-    [new Vector(1000,400), Color.Red],
-    [new Vector(1040,420),Color.Green],
-
-    [new Vector(960, 338), Color.Black],
-    [new Vector(1000,322), Color.Red],
-    [new Vector(1000,360),Color.Green],
-
-    [new Vector(1040,300),Color.Red],
-    [new Vector(1040,340),Color.Green],
-    [new Vector(1040,380),Color.Red],
-    [new Vector(368,300), Color.White]
-
-
-  ].map(params => new Ball(params[0], params[1]))
-
-  this.whiteBall = this.balls[this.balls.length -1];
+  this.whiteBall = this.balls.find(ball => ball.color === Color.White);
   this.stick = new Stick(new Vector(368,300),this.whiteBall.shoot.bind(this.whiteBall));
 
   //determining table borders
@@ -39,20 +14,23 @@ function mainGame(){
     TopY: 73,
     RightX: 1220,
     BottomY: 590,
-    LeftX: 82,
+    LeftX: 106
   };
 }
 
 //collision detection
 mainGame.prototype.handleCollisions = function(){
   // console.log(this.whiteBall.position);
+
   for(var i = 0; i< this.balls.length; i++){
-    this.balls[i].collision(this.table);
+
+    this.balls[i].collisionWithBorder(this.table);
+
     for(var j = i+1; j < this.balls.length; j++){
       var firstBall = this.balls[i];
       var secondBall = this.balls[j];
 
-      firstBall.collision(secondBall);
+      firstBall.collisionWithBalls(secondBall);
     }
   }
 }
@@ -66,7 +44,7 @@ mainGame.prototype.update = function(){
   this.stick.update();
 
   for(var i = 0; i < this.balls.length; i++){
-    this.balls[i].update(delta);
+    this.balls[i].update(CONSTANTS.delta);
   }
 
   if(!this.movingBalls() && this.stick.shot){

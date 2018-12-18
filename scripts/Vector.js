@@ -33,3 +33,7 @@ Vector.prototype.subtract = function(v){
 Vector.prototype.product = function(v){
   return(this.x * v.x + this.y * v.y);
 }
+
+Vector.prototype.distanceFrom = function(vector){
+  return this.subtract(vector).distance();
+}
