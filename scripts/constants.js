@@ -31,7 +31,17 @@ const CONSTANTS = {
   //stick
   stickpos: new Vector(969,16),
   stick_shot_pos: new Vector(950,11),
-  Max_Power: 6000
+  Max_Power: 6000,
 
+  //table
+  pockets: [
+    new Vector(90,90),//topLeft
+    new Vector(710,92),//topMiddle
+    new Vector(1224,99),//topRight
+    new Vector(1224,590),//bottomRight
+    new Vector(710,590),//bottomMiddle
+    new Vector(90,592)//bottomLeft
+  ],
+  pocket_radius: 46
 
 }

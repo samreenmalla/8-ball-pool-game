@@ -1,6 +1,8 @@
 function Canvas2D(){
   var that = this;
   this.canvas = document.getElementById('canvas');
+  canvas.setAttribute('width', '1500');
+  canvas.setAttribute('height', '825');
   this.ctx = this.canvas.getContext('2d');
 }
 

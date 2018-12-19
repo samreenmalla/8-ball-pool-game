@@ -34,6 +34,7 @@ Vector.prototype.product = function(v){
   return(this.x * v.x + this.y * v.y);
 }
 
+//to get distance between two vectors
 Vector.prototype.distanceFrom = function(vector){
   return this.subtract(vector).distance();
 }

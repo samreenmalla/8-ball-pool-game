@@ -90,6 +90,10 @@ Ball.prototype.collisionWithBalls = function(ball){
 Ball.prototype.collisionWithBorder = function(table){
 
   var collided = false;
+
+  if(!this.moving || !this.onTable){
+    return;
+  }
   //collision
 
   if(this.position.y <= table.TopY + CONSTANTS.ball_radius){
@@ -117,23 +121,18 @@ Ball.prototype.collisionWithBorder = function(table){
   }
 }
 
-// Ball.prototype.handleBallInPocket = function(){
+Ball.prototype.handleBallInPocket = function(){
 
-//   if(!this.onTable){
-//     return;
-//   }
+  let inPocket = CONSTANTS.pockets.some(pocket => {
+    return this.position.distanceFrom(pocket) < CONSTANTS.pocket_radius;
+  });
 
-//   let inPocket = this.pockets.some(pocket => {
-//     return this.position.distanceFrom(pocket) < this.hole_radius;
-//   });
-//   if(!inPocket){
-//     return;
-//   }
-
-//   this.onTable = false;
-//   this.moving = false;
-// }
-
+  if(!inPocket){
+    return;
+  }
+  this.onTable = false;
+  this.moving = false;
+}
 
 Ball.prototype.draw = function(){
 

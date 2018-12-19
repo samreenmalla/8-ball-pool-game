@@ -23,7 +23,7 @@ mainGame.prototype.handleCollisions = function(){
   // console.log(this.whiteBall.position);
 
   for(var i = 0; i< this.balls.length; i++){
-
+    this.balls[i].handleBallInPocket();
     this.balls[i].collisionWithBorder(this.table);
 
     for(var j = i+1; j < this.balls.length; j++){
