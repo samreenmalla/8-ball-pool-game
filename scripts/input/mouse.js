@@ -1,4 +1,4 @@
-function handleMouseMovement(event){
+function handleMouseMovement(event) {
   let x = event.pageX;
   let y = event.pageY;
 
@@ -12,34 +12,30 @@ function handleMouseMovement(event){
 //   Mouse.onclick =  true;
 // }
 
-function handleMouseDown(event){
-
+function handleMouseDown(event) {
   handleMouseMovement(event);
 
-  if(event.which === 1){
-    if(!Mouse.left.down)
-      Mouse.left.pressed =  true;
+  if (event.which === 1) {
+    if (!Mouse.left.down) Mouse.left.pressed = true;
     Mouse.left.down = true;
-  }else if (event.which === 2){
-    if(!Mouse.right.down)
-      Mouse.right.pressed = true;
+  } else if (event.which === 2) {
+    if (!Mouse.right.down) Mouse.right.pressed = true;
     Mouse.right.down = true;
-   }
   }
+}
 
-function handleMouseUp(event){
+function handleMouseUp(event) {
   handleMouseMovement(event);
 
-  if(event.which === 1){
+  if (event.which === 1) {
     Mouse.left.down = false;
-  }
-  else if(event.which === 2){
+    // console.log(Mouse.left.down);
+  } else if (event.which === 2) {
     Mouse.right.down = false;
   }
 }
 
-function MouseHandler(){
-
+function MouseHandler() {
   this.left = new ButtonState();
   this.right = new ButtonState();
 
@@ -52,8 +48,9 @@ function MouseHandler(){
 }
 
 //reseting any kind of mouse event
-MouseHandler.prototype.reset = function(){
+MouseHandler.prototype.reset = function() {
   this.left.pressed = false;
-}
+  // this.left.down = false;
+};
 
 let Mouse = new MouseHandler();
