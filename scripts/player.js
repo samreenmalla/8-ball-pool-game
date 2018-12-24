@@ -1,5 +1,5 @@
-function Player(matchScore, Score) {
+function Player(matchScore, totalScore) {
   this.color = undefined;
   this.matchScore = matchScore;
-  this.Score = Score;
+  this.totalScore = totalScore;
 }
