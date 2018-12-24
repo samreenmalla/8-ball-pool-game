@@ -5,6 +5,8 @@ function Ball(position, color) {
   this.image = getBallsByColor(color);
   this.color = color;
   this.onTable = true;
+  this.inPocket = false;
+  this.scored = false;
 }
 
 Ball.prototype.update = function(delta) {
@@ -35,6 +37,10 @@ Ball.prototype.collisionWithBalls = function(ball) {
   // console.log(ball.position);
   //normal vector
   var n = this.position.subtract(ball.position);
+
+  // var sound = new Audio();
+  // sound.src = "../assets/sounds/BallsCollide.wav";
+  // sound.play();
 
   //find distance
   var dist = n.distance();
@@ -116,11 +122,11 @@ Ball.prototype.collisionWithBorder = function(table) {
 };
 
 Ball.prototype.handleBallInPocket = function() {
-  let inPocket = CONSTANTS.pockets.some(pocket => {
+  this.inPocket = CONSTANTS.pockets.some(pocket => {
     return this.position.distanceFrom(pocket) < CONSTANTS.pocket_radius;
   });
 
-  if (!inPocket) {
+  if (!this.inPocket) {
     return;
   }
 
