@@ -5,7 +5,6 @@ function Stick(position, onShoot) {
   this.power = 0;
   this.onShoot = onShoot;
   this.shot = false;
-  this.onTable = true;
 }
 
 Stick.prototype.update = function() {

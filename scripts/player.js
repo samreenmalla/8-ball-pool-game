@@ -1,5 +1,8 @@
 function Player(matchScore, totalScore) {
-  this.color = undefined;
-  this.matchScore = matchScore;
-  this.totalScore = totalScore;
+  this.color;
+  this.turn;
+  this.foul = false;
+  this.setPlayerColor = function() {
+    this.color = color;
+  };
 }

@@ -5,3 +5,29 @@
 body {
   background-color: black;
 }
+.start-page {
+  width: 80%;
+  margin: 0 auto;
+  height: 585px;
+  background-color: grey;
+  background-size: contain;
+  position: relative;
+}
+.game-title {
+  font-family: Arial;
+  top: 25%;
+  left: 37%;
+  position: absolute;
+  font-size: 50px;
+}
+.button {
+  position: absolute;
+  padding: 10px;
+  background-color: lightyellow;
+  font-family: Arial;
+  font-size: 40px;
+  border-radius: 5px;
+  top: 45%;
+  left: 45%;
+  width: 100px;
+}

@@ -32,10 +32,7 @@ mainGame.prototype.togglePlayer = function() {
   }
 };
 
-//collision detection
 mainGame.prototype.handleCollisions = function() {
-  // console.log(this.whiteBall.position);
-
   for (var i = 0; i < this.balls.length; i++) {
     this.balls[i].handleBallInPocket();
     this.balls[i].collisionWithBorder(this.table);
@@ -50,19 +47,18 @@ mainGame.prototype.handleCollisions = function() {
 };
 
 mainGame.prototype.update = function() {
-  //check for collisions
   this.handleCollisions();
-  // console.log(this.balls);
+
   var nextTurn = true;
   this.stick.update();
 
   for (var i = 0; i < this.balls.length; i++) {
     this.balls[i].update(CONSTANTS.delta);
-    // console.log(this.balls[i]);
+  }
+  if (this.movingBalls() && this.stick.shot) {
+    this.stick.position = new Vector(0, 0);
   }
   if (!this.movingBalls() && this.stick.shot && this.whiteBall.onTable) {
-    // this.stick.onTable = false;
-    // console.log(this.whiteBall);
     this.stick.reposition(this.whiteBall.position);
 
     for (var i = 0; i < this.balls.length; i++) {
@@ -97,7 +93,6 @@ mainGame.prototype.movingBalls = function() {
 mainGame.prototype.draw = function() {
   this.board.draw();
   this.stick.draw();
-  //if in pocket check assignede flag || assign || foul points
   for (var i = 0; i < this.balls.length; i++) {
     this.balls[i].draw();
   }

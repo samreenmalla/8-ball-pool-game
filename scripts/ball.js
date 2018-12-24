@@ -27,6 +27,9 @@ Ball.prototype.update = function(delta) {
 Ball.prototype.shoot = function(power, rotation) {
   this.velocity = new Vector(power * Math.cos(rotation), power * Math.sin(rotation));
   this.moving = true;
+  var shoot = sounds.strike;
+  shoot.volume = 0.7;
+  shoot.play();
 };
 
 //collison with balls
@@ -37,10 +40,6 @@ Ball.prototype.collisionWithBalls = function(ball) {
   // console.log(ball.position);
   //normal vector
   var n = this.position.subtract(ball.position);
-
-  // var sound = new Audio();
-  // sound.src = "../assets/sounds/BallsCollide.wav";
-  // sound.play();
 
   //find distance
   var dist = n.distance();
