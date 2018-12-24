@@ -16,8 +16,6 @@ Stick.prototype.update = function() {
   if (Mouse.left.down) {
     this.increasePower();
   } else if (this.power > 0) {
-    console.log(this.power);
-
     this.shoot();
   }
 
@@ -46,9 +44,6 @@ Stick.prototype.shoot = function() {
   this.power = 0;
   this.origin = CONSTANTS.stick_shot_pos.copy();
   this.shot = true;
-  // Mouse.reset();
-  console.log(this.power);
-  console.log(this.shot);
 };
 
 Stick.prototype.reposition = function(position) {

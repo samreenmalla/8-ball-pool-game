@@ -9,21 +9,23 @@ body {
   width: 80%;
   margin: 0 auto;
   height: 585px;
-  background-color: grey;
+  background: url("../assets/images/back.png");
   background-size: contain;
   position: relative;
 }
 .game-title {
-  font-family: Arial;
+  font-family: "Georgia";
+  color: white;
   top: 25%;
   left: 37%;
   position: absolute;
-  font-size: 50px;
+  font-size: 60px;
 }
 .button {
   position: absolute;
   padding: 10px;
-  background-color: lightyellow;
+  background-color: darkolivegreen;
+  color: darkslategray;
   font-family: Arial;
   font-size: 40px;
   border-radius: 5px;

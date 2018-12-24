@@ -23,12 +23,10 @@ function mainGame() {
 }
 
 mainGame.prototype.togglePlayer = function() {
-  if (this.turn == 1) {
-    console.log("player2");
-    this.turn = 0;
-  } else {
-    console.log("player1");
+  if (this.turn == 0) {
     this.turn = 1;
+  } else {
+    this.turn = 0;
   }
 };
 
@@ -63,7 +61,7 @@ mainGame.prototype.update = function() {
 
     for (var i = 0; i < this.balls.length; i++) {
       if (this.balls[i].inPocket && !this.balls[i].scored) {
-        if (this.turn == 1) this.player1Score += 100;
+        if (this.turn == 0) this.player1Score += 100;
         else this.player2Score += 100;
         nextTurn = false;
         this.balls[i].scored = true;
@@ -97,6 +95,17 @@ mainGame.prototype.draw = function() {
     this.balls[i].draw();
   }
   Canvas.ctx.font = "20px Georgia";
+  Canvas.ctx.fillStyle = "black";
   Canvas.ctx.fillText("Player 1 Score: " + this.player1Score, 200, 100);
   Canvas.ctx.fillText("Player 2 Score: " + this.player2Score, 950, 100);
+
+  if (this.turn == 0) {
+    Canvas.ctx.font = "60px Georgia";
+    Canvas.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    Canvas.ctx.fillText("Player1", 600, 200);
+  } else if (this.turn == 1) {
+    Canvas.ctx.font = "60px Georgia";
+    Canvas.ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
+    Canvas.ctx.fillText("Player2", 600, 200);
+  }
 };
